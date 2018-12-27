@@ -20,12 +20,11 @@ int main(int argc,char ** argv) {
 		S1.getSpace();
 
 		if (S1.setStart(pars.getIntegerArg(2), pars.getIntegerArg(3)) && S1.setFinish(pars.getIntegerArg(4), pars.getIntegerArg(5))) {
-			LeeAlgorithm L;
-			PathAcquisition * paths[] = { &L };
-			
-			cout << "Попытка найти кратчайший путь..." << endl;
+			const PathAcquisition & paths=LeeAlgorithm();
 
-			if (paths[0]->findPath(S)) {
+			cout << "Попытка найти кратчайший путь..." << endl;
+			
+			if (paths.findPath(S)) {
 				cout << "Поиск завершен успешно!" << endl;
 			}
 			else {
