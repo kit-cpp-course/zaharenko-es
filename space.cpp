@@ -10,8 +10,7 @@ Space::Space(string f_name) {
 }
 
 Space::~Space() {
-	for (int i = 0; i < c_rows; i++)
-	{
+	for (int i = 0; i < c_rows; i++){
 		delete[] arr[i];
 	}
 	delete[] arr;
@@ -19,9 +18,9 @@ Space::~Space() {
 
 void Space::copy(int ** c_arr) {
 	for (int i = 0; i < c_rows; i++) {
-		for (int j = 0; j < c_columns; j++)
+		for (int j = 0; j < c_columns; j++){
 			c_arr[i][j] = arr[i][j];
-
+		}
 	}
 }
 
@@ -34,10 +33,8 @@ void Space::makeArray(string f_name) {
 	int count = 0;
 	int temp;
 
-	while (file.good())
-	{
-		file >> temp;
-		count++;
+	while (file.good()){
+		file >> temp, count++;
 	}
 
 	file.seekg(0, ios::beg);
@@ -66,10 +63,12 @@ void Space::makeArray(string f_name) {
 	/*
 	* Проинициализируем массив
 	*/
-	for (int i = 0; i < c_rows; i++)
+
+	for (int i = 0; i < c_rows; i++){
 		for (int j = 0; j < c_columns; j++) {
 			file >> arr[i][j];
 		}
+	}
 }
 
 void Space::getSpace() {
@@ -100,8 +99,10 @@ void Space::getSpace() {
 
 		cout << endl;
 		cout << "     ";
-		for (int k = 0; k < c_columns; k++)
+
+		for (int k = 0; k < c_columns; k++){
 			cout << " --- ";
+		}
 		cout << endl;
 	}
 }
@@ -180,7 +181,7 @@ void LeeAlgorithm::recoverPath(Space &S) const {
 
 }
 
-bool LeeAlgorithm::lee(Space &S) const{
+bool LeeAlgorithm::lee(Space &S) const {
 	/*
 	* Непроходимая ячейка (препятствие)
 	*/
@@ -246,7 +247,6 @@ bool LeeAlgorithm::lee(Space &S) const{
 	* Если не помечена, то путь недостижим.
 	*/
 	if (field[S.finish.y][S.finish.x] == BLANK) return false;
-
 
 	return true;
 }
