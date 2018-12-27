@@ -111,24 +111,21 @@ namespace spaces {
 	*/
 		virtual bool findPath(Space &) const = 0;
 	};
-	/*
-	* Класс, в котором реализуется алгорит Ли поиска
-	* кратчайшего пути в двумерном дискретном пространтсве.
-	*/
+
 	class LeeAlgorithm :public PathAcquisition {
 	/*
 	* Длина пути
 	*/
-		int len;
+		mutable int len;
 	/*
 	* Массивы координат точек, составляющих путь
 	*/
-		int * pi;
-		int * pj;
+		mutable int * pi;
+		mutable int * pj;
 	/*
 	* Массив, значения ячеек которого скопированы из int ** arr, чтобы не "испортить" значения arr в результате работы алгоритма.
 	*/
-		int **field;
+		mutable int **field;
 	/*
 	* Значения смещений для получения координат соседних ячеек слева и справа.
 	*/
@@ -140,22 +137,21 @@ namespace spaces {
 	/*
 	* Восстановление кратчайшего пути
 	*/
-		void recoverPath(Space &S);
+		void recoverPath(Space &S) const;
 	/*
 	* Функция, реализующая алгоритм Ли поиска кратчайшего пути из точки (ax, ay) в точку (bx, by)
 	* @param S - ссылка на объект класса Space
 	* @return значение true в случае, если путь найден, иначе false
 	*/
-		bool lee(Space &S);
+		bool lee(Space &S) const;
 
 	public:
 	/*
-	* Поиск кратчайшего пути и его вывод в консоль
+	* Вывод пути в консоль
 	* @param S - ссылка на объект класса Space
 	* @return значение true в случае, если путь найден, иначе false
 	*/
 		bool findPath(Space &S) const;
 	};
-
 }
 
