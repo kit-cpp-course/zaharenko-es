@@ -123,7 +123,7 @@ bool Space::setFinish(int x, int y) {
 }
 
 
-bool LeeAlgorithm::findPath(Space &S) {
+bool LeeAlgorithm::findPath(Space &S) const {
 
 	if (!LeeAlgorithm::lee(S)) {
 		return false;
