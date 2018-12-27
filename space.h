@@ -109,7 +109,7 @@ namespace spaces {
 	/*
 	* Вывод пути в консоль
 	*/
-		virtual bool findPath(Space &) = 0;
+		virtual bool findPath(Space &) const = 0;
 	};
 	/*
 	* Класс, в котором реализуется алгорит Ли поиска
