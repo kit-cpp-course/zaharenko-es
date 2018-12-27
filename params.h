@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <iostream>
 using namespace std;
+
 /*
 * Объект типа params определяет параметры командной строки.
 * В данном классе происходит проверка параметров на то,
@@ -51,5 +52,4 @@ public:
 	string inline getStringArg() {
 		return (string)argv[1];
 	}
-
 };

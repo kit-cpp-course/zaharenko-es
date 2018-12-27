@@ -34,8 +34,7 @@ void Space::makeArray(string f_name) {
 	int temp;
 
 	while (file.good()){
-		file >> temp;
-		count++;
+		file >> temp, count++;
 	}
 
 	file.seekg(0, ios::beg);
@@ -64,6 +63,7 @@ void Space::makeArray(string f_name) {
 	/*
 	* Проинициализируем массив
 	*/
+
 	for (int i = 0; i < c_rows; i++){
 		for (int j = 0; j < c_columns; j++) {
 			file >> arr[i][j];
@@ -99,6 +99,7 @@ void Space::getSpace() {
 
 		cout << endl;
 		cout << "     ";
+
 		for (int k = 0; k < c_columns; k++){
 			cout << " --- ";
 		}
@@ -246,6 +247,6 @@ bool LeeAlgorithm::lee(Space &S) const {
 	* Если не помечена, то путь недостижим.
 	*/
 	if (field[S.finish.y][S.finish.x] == BLANK) return false;
-	
+
 	return true;
 }

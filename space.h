@@ -6,7 +6,7 @@
 using namespace std;
 
 namespace spaces {
-	
+  
 	class LeeAlgorithm;
 	/*
 	* Представление двумерного дискретного пространства для осуществления поиска.
@@ -154,4 +154,3 @@ namespace spaces {
 		bool findPath(Space &S) const;
 	};
 }
-
