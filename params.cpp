@@ -20,17 +20,10 @@ bool params::isRightInput() const {
 }
 
 bool params::isRightValue(int index) const {
-	if (argv[index][0] == '-') {
-		return false;
-	}
-	return true;
-
+	return (argv[index][0] == '-') ? false : true;
 }
 
 bool params::isRightFileName(int index) const {
 	ifstream file(argv[index]);
-	if (!file.is_open()) {
-		return false;
-	}
-	return true;
+	return (!file.is_open()) ? false : true;
 }
