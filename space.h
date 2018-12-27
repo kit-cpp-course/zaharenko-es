@@ -154,7 +154,7 @@ namespace spaces {
 	* @param S - ссылка на объект класса Space
 	* @return значение true в случае, если путь найден, иначе false
 	*/
-		bool findPath(Space &S);
+		bool findPath(Space &S) const;
 	};
 
 }
