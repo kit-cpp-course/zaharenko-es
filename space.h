@@ -16,8 +16,7 @@ namespace spaces {
 	/*
 	* Представление точки в двумерном пространстве.
 	*/
-		class point {
-			
+		class point {	
 		public:
 	/*
 	* Координаты точки
@@ -101,7 +100,22 @@ namespace spaces {
 		bool setFinish(int x, int y);
 	};
 
-	class LeeAlgorithm {
+	/*
+	* Абстрактный класс, в котором определяется кратчайший путь от точки старта
+	* до точки финиша.
+	*/
+	class PathAcquisition {
+	public:
+	/*
+	* Вывод пути в консоль
+	*/
+		virtual bool findPath(Space &) = 0;
+	};
+	/*
+	* Класс, в котором реализуется алгорит Ли поиска
+	* кратчайшего пути в двумерном дискретном пространтсве.
+	*/
+	class LeeAlgorithm :public PathAcquisition {
 	/*
 	* Длина пути
 	*/
@@ -124,22 +138,23 @@ namespace spaces {
 	*/
 		const int dy[4] = { 0, 1, 0, -1 };
 	/*
-	* Вывод пути в консоль
-	*/
-		void displayPath();
-	/*
 	* Восстановление кратчайшего пути
 	*/
 		void recoverPath(Space &S);
-
-	public:
 	/*
 	* Функция, реализующая алгоритм Ли поиска кратчайшего пути из точки (ax, ay) в точку (bx, by)
 	* @param S - ссылка на объект класса Space
 	* @return значение true в случае, если путь найден, иначе false
 	*/
-	bool lee(Space &S);
+		bool lee(Space &S);
 
+	public:
+	/*
+	* Поиск кратчайшего пути и его вывод в консоль
+	* @param S - ссылка на объект класса Space
+	* @return значение true в случае, если путь найден, иначе false
+	*/
+		bool findPath(Space &S);
 	};
 
 }
