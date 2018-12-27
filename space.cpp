@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include "space.h"
 
 using namespace std;
@@ -29,7 +29,7 @@ void Space::makeArray(string f_name) {
 	ifstream file(f_name);
 	file_name = f_name;
 	/*
-	* Подсчитаем количество чисел в файле
+	* РџРѕРґСЃС‡РёС‚Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ С‡РёСЃРµР» РІ С„Р°Р№Р»Рµ
 	*/
 	int count = 0;
 	int temp;
@@ -43,7 +43,7 @@ void Space::makeArray(string f_name) {
 	file.seekg(0, ios::beg);
 	file.clear();
 	/*
-	* Подсчитаем количество пробелов в одной строке
+	* РџРѕРґСЃС‡РёС‚Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕР±РµР»РѕРІ РІ РѕРґРЅРѕР№ СЃС‚СЂРѕРєРµ
 	*/
 	char symbol;
 	int count_space = 0;
@@ -64,7 +64,7 @@ void Space::makeArray(string f_name) {
 	file.seekg(0, ios::beg);
 	file.clear();
 	/*
-	* Проинициализируем массив
+	* РџСЂРѕРёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РјР°СЃСЃРёРІ
 	*/
 	for (int i = 0; i < c_rows; i++)
 		for (int j = 0; j < c_columns; j++) {
@@ -123,11 +123,16 @@ bool Space::setFinish(int x, int y) {
 }
 
 
-void LeeAlgorithm::displayPath() {
+bool LeeAlgorithm::findPath(Space &S) const {
 
-	cout << "Путь:" << endl;
+	if (!LeeAlgorithm::lee(S)) {
+		return false;
+	}
+	LeeAlgorithm::recoverPath(S);
+	
+	cout << "РџСѓС‚СЊ:" << endl;
 	if (len == 0) {
-		cout << "Точки старта и финиша совпадают.";
+		cout << "РўРѕС‡РєРё СЃС‚Р°СЂС‚Р° Рё С„РёРЅРёС€Р° СЃРѕРІРїР°РґР°СЋС‚.";
 	}
 	else {
 		for (int i = 0; i <= len; i++) {
@@ -139,13 +144,14 @@ void LeeAlgorithm::displayPath() {
 		}
 	}
 	cout << endl;
+	return true;
 }
 
-void LeeAlgorithm::recoverPath(Space &S) {
+void LeeAlgorithm::recoverPath(Space &S) const {
 
 	int k, j, i, d;
 	/*
-	* Длина кратчайшего пути из (ax, ay) в (bx, by)
+	* Р”Р»РёРЅР° РєСЂР°С‚С‡Р°Р№С€РµРіРѕ РїСѓС‚Рё РёР· (ax, ay) РІ (bx, by)
 	*/
 	len = field[S.finish.y][S.finish.x];
 
@@ -171,16 +177,16 @@ void LeeAlgorithm::recoverPath(Space &S) {
 	pj[0] = S.start.x;
 	pi[0] = S.start.y;
 
+
 }
 
-bool LeeAlgorithm::lee(Space &S)
-{
+bool LeeAlgorithm::lee(Space &S) const{
 	/*
-	* Непроходимая ячейка (препятствие)
+	* РќРµРїСЂРѕС…РѕРґРёРјР°СЏ СЏС‡РµР№РєР° (РїСЂРµРїСЏС‚СЃС‚РІРёРµ)
 	*/
 	const int WALL = -1;
 	/*
-	* Cвободная непомеченная ячейка
+	* CРІРѕР±РѕРґРЅР°СЏ РЅРµРїРѕРјРµС‡РµРЅРЅР°СЏ СЏС‡РµР№РєР°
 	*/
 	const int BLANK = -2;
 
@@ -207,25 +213,25 @@ bool LeeAlgorithm::lee(Space &S)
 				if (field[i][j] == d)
 				{
 	/*
-	* Проходим по всем непомеченным соседним ячейкам
+	* РџСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РЅРµРїРѕРјРµС‡РµРЅРЅС‹Рј СЃРѕСЃРµРґРЅРёРј СЏС‡РµР№РєР°Рј
 	*/
 					for (k = 0; k < 4; ++k)
 					{
 	/*
-	*Вычисляем координаты соседних ячеек
+	*Р’С‹С‡РёСЃР»СЏРµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ СЃРѕСЃРµРґРЅРёС… СЏС‡РµРµРє
 	*/
 						int neighb_i = i + dy[k], neighb_j = j + dx[k];
 	/*
-	* Проверяем, не выходим ли за границы массива и является ли непомеченной данная ячейка
+	* РџСЂРѕРІРµСЂСЏРµРј, РЅРµ РІС‹С…РѕРґРёРј Р»Рё Р·Р° РіСЂР°РЅРёС†С‹ РјР°СЃСЃРёРІР° Рё СЏРІР»СЏРµС‚СЃСЏ Р»Рё РЅРµРїРѕРјРµС‡РµРЅРЅРѕР№ РґР°РЅРЅР°СЏ СЏС‡РµР№РєР°
 	*/
 						if (neighb_i >= 0 && neighb_i < S.c_rows && neighb_j >= 0 && neighb_j < S.c_columns && field[neighb_i][neighb_j] == BLANK)							
 						{
 	/*
-	* Найдены непомеченные ячейки
+	* РќР°Р№РґРµРЅС‹ РЅРµРїРѕРјРµС‡РµРЅРЅС‹Рµ СЏС‡РµР№РєРё
 	*/
 							stop = false;
 	/*
-	* Распространение волны
+	* Р Р°СЃРїСЂРѕСЃС‚СЂР°РЅРµРЅРёРµ РІРѕР»РЅС‹
 	*/
 							field[neighb_i][neighb_j] = d + 1;
 						}
@@ -236,13 +242,11 @@ bool LeeAlgorithm::lee(Space &S)
 		d++;
 	} while (!stop && field[S.finish.y][S.finish.x] == BLANK);
 	/*
-	* После распространения всех волн проверяем, помечена ли точка финиша.
-	* Если не помечена, то путь недостижим.
+	* РџРѕСЃР»Рµ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅРµРЅРёСЏ РІСЃРµС… РІРѕР»РЅ РїСЂРѕРІРµСЂСЏРµРј, РїРѕРјРµС‡РµРЅР° Р»Рё С‚РѕС‡РєР° С„РёРЅРёС€Р°.
+	* Р•СЃР»Рё РЅРµ РїРѕРјРµС‡РµРЅР°, С‚Рѕ РїСѓС‚СЊ РЅРµРґРѕСЃС‚РёР¶РёРј.
 	*/
 	if (field[S.finish.y][S.finish.x] == BLANK) return false;
 
-	recoverPath(S);
-	displayPath();
 
 	return true;
 }

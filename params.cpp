@@ -1,4 +1,4 @@
-#include <fstream>
+п»ї#include <fstream>
 #include "params.h"
 #include "exception"
 
@@ -7,9 +7,9 @@ using namespace std;
 bool params::isRightInput() const {
 	try {
 		if (argc != 6 || !isRightFileName(1) || !isRightValue(2) || !isRightValue(3) || !isRightValue(4) || !isRightValue(5)) {
-			throw exception("Ошибка при вводе параметров.");
+			throw exception("РћС€РёР±РєР° РїСЂРё РІРІРѕРґРµ РїР°СЂР°РјРµС‚СЂРѕРІ.");
 		} else {
-			cout << "Параметры введены верно." << endl;
+			cout << "РџР°СЂР°РјРµС‚СЂС‹ РІРІРµРґРµРЅС‹ РІРµСЂРЅРѕ." << endl;
 			return true;
 		}		
 	}
