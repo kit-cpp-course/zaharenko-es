@@ -123,8 +123,13 @@ bool Space::setFinish(int x, int y) {
 }
 
 
-void LeeAlgorithm::displayPath() {
+bool LeeAlgorithm::findPath(Space &S) {
 
+	if (!LeeAlgorithm::lee(S)) {
+		return false;
+	}
+	LeeAlgorithm::recoverPath(S);
+	
 	cout << "Путь:" << endl;
 	if (len == 0) {
 		cout << "Точки старта и финиша совпадают.";
@@ -139,6 +144,7 @@ void LeeAlgorithm::displayPath() {
 		}
 	}
 	cout << endl;
+	return true;
 }
 
 void LeeAlgorithm::recoverPath(Space &S) {
@@ -157,9 +163,11 @@ void LeeAlgorithm::recoverPath(Space &S) {
 		pj[d] = j;
 		pi[d] = i;
 		d--;
-		for (k = 0; k < 4; ++k){
+		for (k = 0; k < 4; ++k)
+		{
 			int neighb_i = i + dy[k], neighb_j = j + dx[k];
-			if (neighb_i >= 0 && neighb_i <S.c_rows && neighb_j >= 0 && neighb_j < S.c_columns && field[neighb_i][neighb_j] == d){
+			if (neighb_i >= 0 && neighb_i <S.c_rows && neighb_j >= 0 && neighb_j < S.c_columns && field[neighb_i][neighb_j] == d)
+			{
 				j = j + dx[k];
 				i = i + dy[k];
 				break;
@@ -168,6 +176,7 @@ void LeeAlgorithm::recoverPath(Space &S) {
 	}
 	pj[0] = S.start.x;
 	pi[0] = S.start.y;
+
 
 }
 
@@ -184,9 +193,8 @@ bool LeeAlgorithm::lee(Space &S)
 
 	len = 0;
 	field = new int *[S.c_rows];
-	for (int i = 0; i < S.c_rows; ++i){
+	for (int i = 0; i < S.c_rows; ++i)
 		field[i] = new int[S.c_columns];
-	}
 	S.copy(field);
 
 	pi = new int[S.c_columns*S.c_rows];
@@ -203,11 +211,13 @@ bool LeeAlgorithm::lee(Space &S)
 		stop = true;
 		for (i = 0; i < S.c_rows; ++i) {
 			for (j = 0; j < S.c_columns; ++j) {
-				if (field[i][j] == d){
+				if (field[i][j] == d)
+				{
 	/*
 	* Проходим по всем непомеченным соседним ячейкам
 	*/
-					for (k = 0; k < 4; ++k){
+					for (k = 0; k < 4; ++k)
+					{
 	/*
 	*Вычисляем координаты соседних ячеек
 	*/
@@ -215,7 +225,8 @@ bool LeeAlgorithm::lee(Space &S)
 	/*
 	* Проверяем, не выходим ли за границы массива и является ли непомеченной данная ячейка
 	*/
-						if (neighb_i >= 0 && neighb_i < S.c_rows && neighb_j >= 0 && neighb_j < S.c_columns && field[neighb_i][neighb_j] == BLANK){
+						if (neighb_i >= 0 && neighb_i < S.c_rows && neighb_j >= 0 && neighb_j < S.c_columns && field[neighb_i][neighb_j] == BLANK)							
+						{
 	/*
 	* Найдены непомеченные ячейки
 	*/
@@ -236,9 +247,6 @@ bool LeeAlgorithm::lee(Space &S)
 	* Если не помечена, то путь недостижим.
 	*/
 	if (field[S.finish.y][S.finish.x] == BLANK) return false;
-
-	recoverPath(S);
-	displayPath();
-
+	
 	return true;
 }
