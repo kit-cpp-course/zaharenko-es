@@ -147,7 +147,7 @@ bool LeeAlgorithm::findPath(Space &S) const {
 	return true;
 }
 
-void LeeAlgorithm::recoverPath(Space &S) {
+void LeeAlgorithm::recoverPath(Space &S) const {
 
 	int k, j, i, d;
 	/*
@@ -180,8 +180,7 @@ void LeeAlgorithm::recoverPath(Space &S) {
 
 }
 
-bool LeeAlgorithm::lee(Space &S)
-{
+bool LeeAlgorithm::lee(Space &S) const {
 	/*
 	* Непроходимая ячейка (препятствие)
 	*/
