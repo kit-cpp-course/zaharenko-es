@@ -10,8 +10,7 @@ Space::Space(string f_name) {
 }
 
 Space::~Space() {
-	for (int i = 0; i < c_rows; i++)
-	{
+	for (int i = 0; i < c_rows; i++){
 		delete[] arr[i];
 	}
 	delete[] arr;
@@ -19,9 +18,9 @@ Space::~Space() {
 
 void Space::copy(int ** c_arr) {
 	for (int i = 0; i < c_rows; i++) {
-		for (int j = 0; j < c_columns; j++)
+		for (int j = 0; j < c_columns; j++){
 			c_arr[i][j] = arr[i][j];
-
+		}
 	}
 }
 
@@ -34,8 +33,7 @@ void Space::makeArray(string f_name) {
 	int count = 0;
 	int temp;
 
-	while (file.good())
-	{
+	while (file.good()){
 		file >> temp;
 		count++;
 	}
@@ -66,10 +64,11 @@ void Space::makeArray(string f_name) {
 	/*
 	* Проинициализируем массив
 	*/
-	for (int i = 0; i < c_rows; i++)
+	for (int i = 0; i < c_rows; i++){
 		for (int j = 0; j < c_columns; j++) {
 			file >> arr[i][j];
 		}
+	}
 }
 
 void Space::getSpace() {
@@ -100,8 +99,9 @@ void Space::getSpace() {
 
 		cout << endl;
 		cout << "     ";
-		for (int k = 0; k < c_columns; k++)
+		for (int k = 0; k < c_columns; k++){
 			cout << " --- ";
+		}
 		cout << endl;
 	}
 }
@@ -157,11 +157,9 @@ void LeeAlgorithm::recoverPath(Space &S) {
 		pj[d] = j;
 		pi[d] = i;
 		d--;
-		for (k = 0; k < 4; ++k)
-		{
+		for (k = 0; k < 4; ++k){
 			int neighb_i = i + dy[k], neighb_j = j + dx[k];
-			if (neighb_i >= 0 && neighb_i <S.c_rows && neighb_j >= 0 && neighb_j < S.c_columns && field[neighb_i][neighb_j] == d)
-			{
+			if (neighb_i >= 0 && neighb_i <S.c_rows && neighb_j >= 0 && neighb_j < S.c_columns && field[neighb_i][neighb_j] == d){
 				j = j + dx[k];
 				i = i + dy[k];
 				break;
@@ -186,8 +184,9 @@ bool LeeAlgorithm::lee(Space &S)
 
 	len = 0;
 	field = new int *[S.c_rows];
-	for (int i = 0; i < S.c_rows; ++i)
+	for (int i = 0; i < S.c_rows; ++i){
 		field[i] = new int[S.c_columns];
+	}
 	S.copy(field);
 
 	pi = new int[S.c_columns*S.c_rows];
@@ -204,13 +203,11 @@ bool LeeAlgorithm::lee(Space &S)
 		stop = true;
 		for (i = 0; i < S.c_rows; ++i) {
 			for (j = 0; j < S.c_columns; ++j) {
-				if (field[i][j] == d)
-				{
+				if (field[i][j] == d){
 	/*
 	* Проходим по всем непомеченным соседним ячейкам
 	*/
-					for (k = 0; k < 4; ++k)
-					{
+					for (k = 0; k < 4; ++k){
 	/*
 	*Вычисляем координаты соседних ячеек
 	*/
@@ -218,8 +215,7 @@ bool LeeAlgorithm::lee(Space &S)
 	/*
 	* Проверяем, не выходим ли за границы массива и является ли непомеченной данная ячейка
 	*/
-						if (neighb_i >= 0 && neighb_i < S.c_rows && neighb_j >= 0 && neighb_j < S.c_columns && field[neighb_i][neighb_j] == BLANK)							
-						{
+						if (neighb_i >= 0 && neighb_i < S.c_rows && neighb_j >= 0 && neighb_j < S.c_columns && field[neighb_i][neighb_j] == BLANK){
 	/*
 	* Найдены непомеченные ячейки
 	*/
